@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    image: node-sample
+    command: yarn start
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"

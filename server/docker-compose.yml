@@ -2,14 +2,20 @@ version: "3.7"
 services:
   app:
     image: node-sample
+    restart: always
     command: yarn start
+    environment:
+      - MONGO_URI=mongodb://mongodb-myapp:27017/myapp
     ports:
       - "4000:4000"
     volumes:
       - .:/usr/app
+    links:
+      - mongodb-myapp
     depends_on:
-      - mongo
-  mongo:
+      - mongodb-myapp
+  mongodb-myapp:
     image: mongo
+    restart: always
     ports:
       - "27017:27017"
